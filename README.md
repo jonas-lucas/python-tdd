@@ -2,7 +2,7 @@
 
 A repository to take notes about the book "Test-Driven Python Development" bt Packt Pub.
 
-## How to Test an Package
+## How to Test a Package
 
 The packages contained in this repository are organized under the name `stock_alert`.
 
