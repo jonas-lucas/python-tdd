@@ -59,8 +59,13 @@ class StockExerciseTest(unittest.TestCase):
     def setUp(self):
         self.goog = Stock("GOOG")
         
-    def test_older_timestamp_should_throw_ValueError(self):
-        with self.assertRaises(ValueError):
-            self.goog.update(datetime(2014, 2, 13), 1)
-            self.goog.update(datetime(2014, 2, 12), 2)
+    def test_precedence_update(self):
+        self.goog.update(datetime(2014, 2, 10), 10)
+        self.goog.update(datetime(2014, 2, 9), 11)
+        self.assertEqual(10, self.goog.price)
+        
+    def test_price_is_the_latest_even_if_updates_are_made_out_of_order(self):
+        self.goog.update(datetime(2014, 2, 13), price=8)
+        self.goog.update(datetime(2014, 2, 12), price=10)
+        self.assertEqual(8, self.goog.price)
         
